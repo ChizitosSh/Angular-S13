@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataComponent } from './data/data.component';
 import { FormsModule } from '@angular/forms';
 import { TablaComponent } from './tabla/tabla.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { TablaComponent } from './tabla/tabla.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     DataComponent,

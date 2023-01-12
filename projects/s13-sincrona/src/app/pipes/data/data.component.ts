@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-ejercicio1',
-  templateUrl: './ejercicio1.component.html',
-  styleUrls: ['./ejercicio1.component.css']
+  selector: 'app-data',
+  templateUrl: './data.component.html',
+  styleUrls: ['./data.component.css']
 })
-export class Ejercicio1Component {
+export class DataComponent {
 
   constructor(private formBuilder: FormBuilder){}
 
   formPipes = this.formBuilder.group({
-    valor: ['', {validators: [Validators.pattern('^[A-Z a-z]+$')]}],
+    valor: ['', {validators: [Validators.required, Validators.pattern('^[A-Z a-z]+$')]}],
   });
 
   get valor(){ return this.formPipes.get('valor'); }

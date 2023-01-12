@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.css']
+  selector: 'app-ejercicio1',
+  templateUrl: './ejercicio1.component.html',
+  styleUrls: ['./ejercicio1.component.css']
 })
-export class DataComponent implements OnInit {
-  
-  //
+export class Ejercicio1Component {
+
   constructor(private formBuilder: FormBuilder){}
 
   formPipes = this.formBuilder.group({
@@ -16,9 +15,9 @@ export class DataComponent implements OnInit {
   });
 
   get valor(){ return this.formPipes.get('valor'); }
-  
-  //
-  
+
+
+
   title: string = 'uso de pipes';
   upperCase!: string;
   currency!: number;
@@ -41,7 +40,6 @@ export class DataComponent implements OnInit {
     console.log(this.currencyTable)
   }
 
-  constructor() { }
 
   ngOnInit(): void {
   }

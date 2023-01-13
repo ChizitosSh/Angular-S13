@@ -16,7 +16,9 @@ registerLocaleData(localeES, 'es-PE')
     BrowserModule,
     PipesModule
   ],
-  providers: [{provide: LOCALE_ID, useValue: 'es-PE'}],
+  providers: [
+    {provide: LOCALE_ID, useValue: 'es-PE'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

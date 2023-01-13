@@ -1,47 +1,49 @@
-import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-ejercicio1',
-  templateUrl: './ejercicio1.component.html',
-  styleUrls: ['./ejercicio1.component.css']
+  selector: 'app-data',
+  templateUrl: './data.component.html',
+  styleUrls: ['./data.component.css']
 })
-export class Ejercicio1Component {
-
-  constructor(private formBuilder: FormBuilder){}
-
-  formPipes = this.formBuilder.group({
-    valor: ['', {validators: [Validators.pattern('^[A-Z a-z]+$')]}],
-  });
-
-  get valor(){ return this.formPipes.get('valor'); }
-
-
+export class DataComponent implements OnInit {
 
   title: string = 'uso de pipes';
-  upperCase!: string;
-  currency!: number;
+  
+  // Ejercicio 1
+
+  constructor( private formBuilder: FormBuilder ) { }
+
+  formUppercasePipe!: FormGroup; 
+
+  initPipeForm(): FormGroup {
+    return this.formBuilder.group({
+      valor: ['', [Validators.required, Validators.pattern('^[A-Z a-z]+$')]],
+    })
+  }
+
+  get valor() { return this.formUppercasePipe.get('valor'); };
+  
+
+  // Ejercicio 2
+
+  formCurrencyPipe!: FormGroup;
 
   currencyArray = ['USD', 'EUR', 'CAD', 'PEN'];
 
-  selectedCurrency!: string;
-
-  currencyTable = [
-    {
-      selectedCurrency : this.selectedCurrency,
-      currency : this.currency,
-    }
-  ]
-
-  currencyTableAdd = {};
-
-  enviar() {
-    this.currencyTableAdd = this.currencyTable.push();
-    console.log(this.currencyTable)
+  initCurrencyForm(): FormGroup {
+    return this.formBuilder.group({
+      currency: ['', [Validators.required, Validators.pattern('^[0-9.]*$')]],
+      selectedCurrency: ['', [Validators.required]],
+    })
   }
-
+  
+  get currency() { return this.formCurrencyPipe.get('currency'); };
+  get selectedCurrency() { return this.formCurrencyPipe.get('selectedCurrency'); };
 
   ngOnInit(): void {
+    this.formUppercasePipe = this.initPipeForm();
+    this.formCurrencyPipe = this.initCurrencyForm();
   }
 
 }

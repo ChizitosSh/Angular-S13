@@ -1,61 +1,45 @@
-<section class="container py-5 w-50">
-      <section class="card shadow-2-strong" style="border-radius: 1rem">
+<main class="container py-5 w-50">
+    <section class="card shadow-2-strong" style="border-radius: 1rem">
         <section class="card-body p-5">
-          <h2 class="text-center">Formulario Reactivo - Pipes</h2>
-          <form [formGroup]="formPipes">
-            <section class="form-group my-4">
-              <label class="form-label fw-bold" for="valor">Name:</label>
-              <input
-                class="form-control"
-                type="text"
-                id="valor"
-                placeholder="Ingrese un valor"
-                formControlName="valor"
-              />
-              <p class="mt-4">Value: <strong> {{ formPipes.value.valor | uppercase }} </strong></p>
+            <h2 class="text-center">{{ title | uppercase }}</h2>
+            
+            <form [formGroup]="formUppercasePipe">
+                <h3>Uppercase Pipe</h3>
+                <section class="form-group my-4">
+                    <label class="form-label fw-bold" for="valor">Name:</label>
+                    <input class="form-control" type="text" id="valor" placeholder="Ingrese un valor" formControlName="valor">
+                    <p class="mt-4" *ngIf="valor?.valid">Resultado: <strong> {{ valor?.value | uppercase }} </strong></p>
 
-              <section *ngIf="valor?.invalid && (valor?.dirty || valor?.touched)">
-                <section *ngIf="valor?.errors?.['required']" class="alert alert-danger">
-                    El valor es obligatorio
+                    <section *ngIf="valor?.invalid && (valor?.dirty || valor?.touched)">
+                        <section *ngIf="valor?.errors?.['required']" class="alert alert-danger mt-3">Por favor, ingrese un valor</section>
+                        <section *ngIf="valor?.errors?.['pattern']" class="alert alert-danger mt-3">El valor solo permite ingresar letras</section>
+                    </section>
+
                 </section>
-                <section *ngIf="valor?.errors?.['pattern']" class="alert alert-danger">
-                    El valor solo permite ingresar letras
+            </form>
+            <form [formGroup]="formCurrencyPipe">
+                <h3>Currency Pipe</h3>
+                <section class="form-group my-4">
+                    <label for="currency" class="form-label fw-bold">Valor:</label>
+                    <section class="row">
+                        <section class="col-md-7">
+                            <input type="number" id="currency" class="form-control" formControlName="currency">
+                        </section>
+                        <section class="col-md-5">
+                            <select name="currencies" id="currencies" class="form-select col-md-4" formControlName="selectedCurrency">
+                                <option value="{{ index }}" *ngFor="let index of currencyArray">{{ index }}</option>
+                            </select>
+                        </section>
+                    </section>
+                    <p class="mt-3" *ngIf="currency?.valid && selectedCurrency?.valid">Resultado: <strong>{{ selectedCurrency?.value }}:</strong> {{ currency?.value | currency: selectedCurrency?.value:'symbol-narrow' }}</p>
+            
+                    <section *ngIf="currency?.invalid && (currency?.dirty || currency?.touched)">
+                        <section *ngIf="currency?.errors?.['required']" class="alert alert-danger mt-3">Por favor, ingrese un valor</section>
+                        <section *ngIf="currency?.errors?.['pattern']" class="alert alert-danger mt-3">Por favor, ingrese solo números</section>
+                    </section>
+
                 </section>
-            </section>
-            </section>
-          </form>
+            </form>
         </section>
-      </section>
     </section>
-
-
-    <section class="container py-5 w-50">
-        <section class="card shadow-2-strong" style="border-radius: 1rem">
-          <section class="card-body p-5">
-    <section>
-        <h3>Currency Pipe</h3>
-        <label for="currency" class="form-label">Valor:</label>
-        <section class="row">
-            <section class="col-md-7">
-                <input type="number" id="currency" class="form-control" [(ngModel)]="currency">
-            </section>
-            <section class="col-md-5">
-                <select name="currencies" id="currencies" class="form-select col-md-4" [(ngModel)]="selectedCurrency">
-                    <option value="{{ index }}" *ngFor="let index of currencyArray">{{ index }}</option>
-                </select>
-            </section>
-        </section>
-
-        <p class="mt-3">Resultado: <strong>{{ selectedCurrency }}:</strong> {{ currency | currency: selectedCurrency }}</p>
-        <button class="btn btn-primary" (click)="enviar()">Guardar</button>
-
-        <app-tabla [currencyTable]="currencyTable"></app-tabla>
-    </section>
-</section>
-</section>
-</section>
-    
-   
-
-
-<
+</main>
